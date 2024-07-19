@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Text Classification</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Text Classification</h1>
+        <form method="post" action="/classify">
+            <div class="form-group">
+                <label for="text">Enter text to classify:</label>
+                <textarea class="form-control" id="text" name="text" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Classify</button>
+        </form>
+        <div class="mt-3">
+            <p id="result"></p>
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/classify', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.result;
+            });
+        });
+    </script>
+</body>
+</html>
