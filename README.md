@@ -56,3 +56,80 @@ This project is a web application built with Flask that classifies text as "Raci
 Start the Flask app:
 ```bash
 python app.py
+
+Open your browser and navigate to http://127.0.0.1:5000/ to access the web interface.
+
+Classify Text via API
+You can classify text using the /classify endpoint.
+
+Example request:
+
+bash
+Copy code
+curl -X POST -F "text=Your text here" http://127.0.0.1:5000/classify
+Training the Model
+Load your dataset in DiscriminatoryText.csv.
+Run the training script:
+bash
+Copy code
+python train.py
+Preprocessing
+Removing URLs
+Removing non-alphabet characters
+Converting to lowercase
+Handling negation
+Model Training
+The BERT model is trained on your dataset and saved in the saved_model2 directory.
+
+Deploying with Docker
+Dockerfile
+Create a Dockerfile in the project root:
+
+dockerfile
+Copy code
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run the application
+CMD ["flask", "run"]
+Building and Running the Docker Container
+Build the Docker image:
+
+bash
+Copy code
+docker build -t flask-bert-classifier .
+Run the Docker container:
+
+bash
+Copy code
+docker run -p 5000:5000 flask-bert-classifier
+API Endpoints
+GET /
+Description: Renders the home page.
+Response: HTML page.
+POST /classify
+Description: Classifies the provided text as "Racist" or "Non-Racist".
+Parameters:
+text: The text to classify (form data).
+Response: JSON with the classification result.
+json
+Copy code
+{
+    "result": "Non-Racist. It is good to post."
+}
