@@ -64,14 +64,14 @@ You can classify text using the /classify endpoint.
 
 Example request:
 
-bash
-Copy code
+
+
 curl -X POST -F "text=Your text here" http://127.0.0.1:5000/classify
 Training the Model
 Load your dataset in DiscriminatoryText.csv.
 Run the training script:
 bash
-Copy code
+
 python train.py
 Preprocessing
 Removing URLs
@@ -86,7 +86,6 @@ Dockerfile
 Create a Dockerfile in the project root:
 
 dockerfile
-Copy code
 # Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
@@ -112,12 +111,12 @@ Building and Running the Docker Container
 Build the Docker image:
 
 bash
-Copy code
+
 docker build -t flask-bert-classifier .
 Run the Docker container:
 
 bash
-Copy code
+
 docker run -p 5000:5000 flask-bert-classifier
 API Endpoints
 GET /
@@ -129,7 +128,7 @@ Parameters:
 text: The text to classify (form data).
 Response: JSON with the classification result.
 json
-Copy code
+
 {
     "result": "Non-Racist. It is good to post."
 }
