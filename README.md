@@ -49,6 +49,8 @@ Start the Flask app:
 ```bash
 python app.py
 ```
+
+** The model file is too large, hence it was uploaded in parts, combine it and save it as tf_model.h5
 Open your browser and navigate to http://127.0.0.1:5000/ to access the web interface.
 
 Classify Text via API
