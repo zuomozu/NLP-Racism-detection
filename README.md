@@ -62,25 +62,24 @@ curl -X POST -F "text=Your text here" http://127.0.0.1:5000/classify
 
 ```
 
-
-Deploying with Docker
-
-
-bash
-
+### Deploying with Docker
 docker build -t flask-bert-classifier .
 Run the Docker container:
 
-bash
+
 ```
 docker run -p 5000:5000 flask-bert-classifier
 
 ```
-API Endpoints
-GET /
+### API Endpoints
+
+#### GET /
 Description: Renders the home page.
+
 Response: HTML page.
-POST /classify
+
+
+#### POST /classify
 Description: Classifies the provided text as "Racist" or "Non-Racist".
 Parameters:
 text: The text to classify (form data).
@@ -88,5 +87,5 @@ Response: JSON with the classification result.
 json
 
 {
-    "result": "Non-Racist. It is good to post."
+    "result": "Non-Racist| Racist."
 }
