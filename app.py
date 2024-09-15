@@ -18,19 +18,18 @@ def handle_negation(text):
     return text
 
 def classify_text(text, model, tokenizer, max_length=128):
-    print("WWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEE AAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRREEEEEEEEEEEEEEEE in      classify")
+
     # Preprocess text
     text = preprocess_text(text)
     text = handle_negation(text)
     # Tokenize text
-    print("WWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEE AAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRREEEEEEEEEEEEEEEE in      Tokenize")
+
     inputs = tokenizer.encode_plus(text, max_length=max_length, truncation=True, padding='max_length', add_special_tokens=True)
     input_ids = np.array([inputs['input_ids']])
     attention_mask = np.array([inputs['attention_mask']])
     # Predict
-    print("WWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEE AAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRREEEEEEEEEEEEEEEE in      Predict")
+
     predictions = model.predict({'input_ids': input_ids, 'attention_mask': attention_mask})
-    print("WWWWWWWWWWWEEEEEEEEEEEEEEEEEEEEEEE AAAAAAAAAAAAAAAAAAAARRRRRRRRRRRRRRREEEEEEEEEEEEEEEE in      Predict RRRRRRRRRREEEEEEEEESUUUUUUUUUUUUUUULLLLLLLLLLT",predictions)
     label_id = np.argmax(predictions[0], axis=1).flatten()
     return label_id[0]
 
